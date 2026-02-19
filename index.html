@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Veding.uz — To'y Rejalashtirish Tizimi</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;
+  --sidebar:#111318;
+  --card:#161b22;
+  --card2:#1c2128;
+  --card3:#21262d;
+  --blue:#2563eb;
+  --blue-h:#1d4ed8;
+  --blue-glow:rgba(37,99,235,0.15);
+  --blue-soft:rgba(37,99,235,0.08);
+  --accent:#38bdf8;
+  --green:#10b981;
+  --orange:#f59e0b;
+  --red:#ef4444;
+  --purple:#8b5cf6;
+  --pink:#ec4899;
+  --text:#e6edf3;
+  --text2:#c9d1d9;
+  --muted:#7d8590;
+  --border:#30363d;
+  --border2:#21262d;
+  --sidebar-w:240px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden;font-size:14px;}
+
+/* ═══════════════════════════
+   SIDEBAR
+═══════════════════════════ */
+aside{
+  width:var(--sidebar-w);min-height:100vh;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;left:0;top:0;bottom:0;z-index:100;
+  transition:width 0.3s;
+}
+.logo{
+  padding:20px 20px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.logo-icon{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.logo-text{font-size:15px;font-weight:700;letter-spacing:0.02em;}
+.logo-text span{color:var(--accent)}
+
+.nav-section{padding:12px 10px 4px;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;margin:1px 8px;
+  border-radius:8px;cursor:pointer;
+  font-size:13px;font-weight:500;color:var(--muted);
+  transition:all 0.18s;text-decoration:none;
+  border:1px solid transparent;
+}
+.nav-item:hover{background:var(--card2);color:var(--text2);}
+.nav-item.active{background:var(--blue-soft);color:var(--text);border-color:rgba(37,99,235,0.2);}
+.nav-item.active svg{color:var(--blue);}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:0.7;}
+.nav-item.active svg{opacity:1;}
+.nav-badge{
+  margin-left:auto;min-width:18px;height:18px;border-radius:99px;
+  background:var(--blue);color:#fff;
+  font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;
+}
+.nav-badge.green{background:var(--green)}
+.nav-badge.orange{background:var(--orange)}
+
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--border);padding:12px 10px;}
+.user-card{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:8px;cursor:pointer;
+  transition:background 0.18s;
+}
+.user-card:hover{background:var(--card2)}
+.u-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
+}
+.u-name{font-size:12px;font-weight:600;}
+.u-role{font-size:11px;color:var(--muted);}
+
+/* ═══════════════════════════
+   MAIN
+═══════════════════════════ */
+main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;}
+
+/* TOPBAR */
+.topbar{
+  height:52px;background:var(--sidebar);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 24px;gap:12px;
+  position:sticky;top:0;z-index:50;
+}
+.topbar-title{font-size:14px;font-weight:600;flex:1;}
+.topbar-search{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:8px;padding:6px 12px;
+  font-size:12px;color:var(--muted);
+  cursor:pointer;transition:border-color 0.2s;
+}
+.topbar-search:hover{border-color:var(--blue);}
+.topbar-search svg{width:13px;height:13px;}
+.tb-btn{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--card2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.18s;color:var(--muted);
+  position:relative;
+}
+.tb-btn:hover{border-color:var(--blue);color:var(--text);}
+.tb-dot{
+  position:absolute;top:5px;right:5px;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--blue);border:1px solid var(--sidebar);
+}
+
+/* PAGE */
+.page{display:none;padding:24px;}
+.page.active{display:block;}
+
+/* ═══════════════════════════
+   COMMON COMPONENTS
+═══════════════════════════ */
+.page-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;}
+.ph-left h1{font-size:20px;font-weight:700;margin-bottom:4px;}
+.ph-left p{font-size:12px;color:var(--muted);}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;
+  cursor:pointer;transition:all 0.18s;border:none;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  text-decoration:none;
+}
+.btn-primary{background:var(--blue);color:#fff;}
+.btn-primary:hover{background:var(--blue-h);}
+.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border);}
+.btn-outline:hover{border-color:var(--blue);color:var(--text);}
+.btn-ghost{background:transparent;color:var(--muted);}
+.btn-ghost:hover{color:var(--text);background:var(--card2);}
+.btn-sm{padding:5px 10px;font-size:11px;}
+.btn-danger{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2);}
+.btn-danger:hover{background:var(--red);color:#fff;}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.card-p{padding:20px;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+
+/* STAT CARDS */
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:18px 20px;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.stat-card:hover{border-color:rgba(37,99,235,0.4);transform:translateY(-1px);}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.sc-icon{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.sc-menu{color:var(--muted);font-size:16px;cursor:pointer;}
+.sc-val{font-size:24px;font-weight:700;margin-bottom:4px;}
+.sc-lbl{font-size:12px;color:var(--muted);}
+.sc-trend{font-size:11px;margin-top:8px;display:flex;align-items:center;gap:4px;}
+.trend-up{color:var(--green);}
+.trend-down{color:var(--red);}
+
+/* BADGE */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 8px;border-radius:999px;
+  font-size:11px;font-weight:500;
+}
+.badge-blue{background:rgba(37,99,235,0.12);color:#60a5fa;}
+.badge-green{background:rgba(16,185,129,0.12);color:#34d399;}
+.badge-orange{background:rgba(245,158,11,0.12);color:#fbbf24;}
+.badge-red{background:rgba(239,68,68,0.12);color:#f87171;}
+.badge-purple{background:rgba(139,92,246,0.12);color:#a78bfa;}
+.badge-gray{background:var(--card2);color:var(--muted);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{
+  padding:10px 14px;text-align:left;
+  font-size:11px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.06em;
+  border-bottom:1px solid var(--border);
+}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--border2);font-size:12px;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--card2);}
+.tbl-avatar{
+  width:30px;height:30px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#fff;flex-shrink:0;
+}
+
+/* PROGRESS */
+.progress{height:4px;background:var(--card3);border-radius:99px;overflow:hidden;}
+.progress-bar{height:100%;border-radius:99px;transition:width 0.6s ease;}
+
+/* AVATAR GROUP */
+.avatar-group{display:flex;}
+.av-item{
+  width:26px;height:26px;border-radius:50%;
+  border:2px solid var(--card);
+  background:linear-gradient(135deg,var(--blue),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:#fff;
+  margin-left:-8px;
+}
+.av-item:first-child{margin-left:0;}
+
+/* SECTION HEADER */
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.sec-head h2{font-size:14px;font-weight:600;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:20px;}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:1px;background:var(--border);}
+.tl-item{position:relative;padding:0 0 20px 16px;}
+.tl-dot{
+  position:absolute;left:-20px;top:3px;
+  width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--card);
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;}
+.tl-title{font-size:12px;font-weight:600;margin-bottom:2px;}
+.tl-desc{font-size:11px;color:var(--muted);}
+.tl-time{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* INPUT */
+.inp{
+  width:100%;background:var(--card2);border:1px solid var(--border);
+  border-radius:8px;padding:9px 12px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--text);
+  outline:none;transition:border-color 0.2s;
+}
+.inp:focus{border-color:var(--blue);}
+.inp::placeholder{color:var(--muted);}
+.inp-label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:0.05em;}
+.inp-group{margin-bottom:14px;}
+select.inp{cursor:pointer;}
+textarea.inp{resize:vertical;min-height:80px;}
+
+/* TOGGLE */
+.toggle{
+  position:relative;width:36px;height:20px;
+  background:var(--border);border-radius:99px;cursor:pointer;
+  transition:background 0.2s;flex-shrink:0;
+}
+.toggle.on{background:var(--blue);}
+.toggle::after{
+  content:'';position:absolute;top:2px;left:2px;
+  width:16px;height:16px;border-radius:50%;
+  background:#fff;transition:left 0.2s;
+}
+.toggle.on::after{left:18px;}
+
+/* CHAT */
+.chat-msg{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;}
+.chat-msg.own{flex-direction:row-reverse;}
+.chat-av{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+}
+.chat-bubble{
+  max-width:65%;padding:9px 13px;border-radius:12px;
+  font-size:12px;line-height:1.6;
+}
+.chat-msg:not(.own) .chat-bubble{background:var(--card2);border-radius:4px 12px 12px 12px;}
+.chat-msg.own .chat-bubble{background:var(--blue);border-radius:12px 4px 12px 12px;}
+.chat-time{font-size:10px;color:var(--muted);margin-top:3px;text-align:right;}
+
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-name{font-size:10px;color:var(--muted);text-align:center;padding:4px;font-weight:600;}
+.cal-day{
+  aspect-ratio:1;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;cursor:pointer;transition:background 0.15s;
+  position:relative;
+}
+.cal-day:hover{background:var(--card2);}
+.cal-day.today{background:var(--blue);color:#fff;font-weight:700;}
+.cal-day.has-event::after{
+  content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;background:var(--orange);
+}
+.cal-day.today.has-event::after{background:#fff;}
+.cal-day.busy{background:rgba(239,68,68,0.1);color:var(--red);}
+.cal-day.empty{opacity:0;}
+
+/* NOTIFICATION DOT */
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+
+/* STAR RATING */
+.stars{color:var(--orange);font-size:12px;letter-spacing:1px;}
+
+/* SCROLL */
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
+
+/* ═══════════════════════════
+   ANIMATIONS
+═══════════════════════════ */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.page.active{animation:fadeIn 0.25s ease both;}
+
+/* MOBILE */
+@media(max-width:900px){
+  aside{width:52px;}
+  .logo-text,.nav-item span,.nav-badge,.nav-section,.sidebar-bottom .u-name,.sidebar-bottom .u-role{display:none;}
+  .nav-item{justify-content:center;padding:10px;}
+  main{margin-left:52px;}
+  .grid4,.grid3{grid-template-columns:1fr 1fr;}
+  .grid2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<aside>
+  <div class="logo">
+    <div class="logo-icon">💍</div>
+    <div class="logo-text">veding<span>.uz</span></div>
+  </div>
+
+  <div class="nav-section">Asosiy</div>
+  <a class="nav-item active" onclick="showPage('dashboard')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span>Dashboard</span>
+  </a>
+  <a class="nav-item" onclick="showPage('events')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+    <span>Tadbirlarim</span>
+    <span class="nav-badge">3</span>
+  </a>
+  <a class="nav-item" onclick="showPage('create')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+    <span>Tadbir Yaratish</span>
+  </a>
+
+  <div class="nav-section">Bron & To'lov</div>
+  <a class="nav-item" onclick="showPage('services')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+    <span>Xizmatlar</span>
+  </a>
+  <a class="nav-item" onclick="showPage('booking')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 12h6M9 16h4"/></svg>
+    <span>Bronlar</span>
+    <span class="nav-badge orange">2</span>
+  </a>
+  <a class="nav-item" onclick="showPage('payment')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+    <span>To'lovlar</span>
+  </a>
+  <a class="nav-item" onclick="showPage('contracts')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <span>Shartnomalar</span>
+  </a>
+
+  <div class="nav-section">Boshqaruv</div>
+  <a class="nav-item" onclick="showPage('guests')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    <span>Mehmonlar</span>
+  </a>
+  <a class="nav-item" onclick="showPage('budget')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    <span>Byudjet</span>
+  </a>
+  <a class="nav-item" onclick="showPage('checklist')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    <span>Checklist</span>
+    <span class="nav-badge green">12</span>
+  </a>
+  <a class="nav-item" onclick="showPage('chat')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <span>Xabarlashuv</span>
+    <span class="nav-badge">5</span>
+  </a>
+  <a class="nav-item" onclick="showPage('calendar')">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span>Taqvim</span>
+  </a>
+
+  <div class="sidebar-bottom">
+    <div class="user-card">
+      <div class="u-avatar">AK</div>
+      <div><div class="u-name">Akbar Karimov</div><div class="u-role">Premium foydalanuvchi</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════ MAIN ═══════ -->
+<main>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-search" onclick="showPage('services')">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Xizmat qidirish...
+    </div>
+    <div class="tb-btn" title="Bildirishnomalar">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+      <div class="tb-dot"></div>
+    </div>
+    <div class="tb-btn" title="Sozlamalar">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: DASHBOARD ═══ -->
+  <div class="page active" id="page-dashboard">
+    <div class="page-head">
+      <div class="ph-left">
+        <h1>Xush kelibsiz, Akbar! 👋</h1>
+        <p>Bugun 19 Fevral, 2026 — Keyingi tadbiringizga 24 kun qoldi</p>
+      </div>
+      <button class="btn btn-primary" onclick="showPage('create')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        Tadbir Yaratish
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid4" style="margin-bottom:20px;">
+      <div class="stat-card">
+        <div class="sc-top">
+          <div class="sc-icon" style="background:rgba(37,99,235,0.12);color:#60a5fa;">📅</div>
+          <div class="sc-menu">···</div>
+        </div>
+        <div class="sc-val">3</div>
+        <div class="sc-lbl">Faol tadbirlar</div>
+        <div class="sc-trend trend-up">↑ +1 bu oy</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-top">
+          <div class="sc-icon" style="background:rgba(16,185,129,0.12);color:#34d399;">✅</div>
+          <div class="sc-menu">···</div>
+        </div>
+        <div class="sc-val">7</div>
+        <div class="sc-lbl">Tasdiqlangan bron</div>
+        <div class="sc-trend trend-up">↑ 2 yangi</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-top">
+          <div class="sc-icon" style="background:rgba(245,158,11,0.12);color:#fbbf24;">💰</div>
+          <div class="sc-menu">···</div>
+        </div>
+        <div class="sc-val">42M</div>
+        <div class="sc-lbl">Jami byudjet (so'm)</div>
+        <div class="sc-trend trend-up">68% sarflandi</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-top">
+          <div class="sc-icon" style="background:rgba(139,92,246,0.12);color:#a78bfa;">👥</div>
+          <div class="sc-menu">···</div>
+        </div>
+        <div class="sc-val">220</div>
+        <div class="sc-lbl">Tasdiqlangan mehmon</div>
+        <div class="sc-trend trend-up">↑ 85% javob berdi</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:20px;">
+      <!-- Aktiv tadbir -->
+      <div class="card card-p">
+        <div class="sec-head">
+          <h2>📌 Aktiv Tadbirlar</h2>
+          <a class="btn btn-ghost btn-sm" onclick="showPage('events')">Barchasini ko'r →</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <!-- Event 1 -->
+          <div style="background:var(--card2);border-radius:10px;padding:14px;border:1px solid var(--border);">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+              <div>
+                <div style="font-size:13px;font-weight:700;">💍 Muhammadov & Karimova To'yi</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px;">📅 15 Mart 2026 · 🏛️ Versal Saroyi</div>
+              </div>
+              <span class="badge badge-orange">24 kun</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <div style="font-size:11px;color:var(--muted);">Tayyorgarlik</div>
+              <div style="font-size:11px;font-weight:600;">68%</div>
+            </div>
+            <div class="progress"><div class="progress-bar" style="width:68%;background:var(--blue);"></div></div>
+          </div>
+          <!-- Event 2 -->
+          <div style="background:var(--card2);border-radius:10px;padding:14px;border:1px solid var(--border);">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+              <div>
+                <div style="font-size:13px;font-weight:700;">🎂 Nodira Yubileyi</div>
+                <div style="font-size:11px;color:var(--muted);margin-top:2px;">📅 5 Aprel 2026 · 🏛️ Osiyo Restoran</div>
+              </div>
+              <span class="badge badge-blue">45 kun</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <div style="font-size:11px;color:var(--muted);">Tayyorgarlik</div>
+              <div style="font-size:11px;font-weight:600;">35%</div>
+            </div>
+            <div class="progress"><div class="progress-bar" style="width:35%;background:var(--purple);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="card card-p">
+        <div class="sec-head">
+          <h2>🕐 So'nggi faoliyat</h2>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot" style="color:var(--green);"></div>
+            <div class="tl-title">Versal Saroyi bron qilindi ✅</div>
+            <div class="tl-desc">15 mart uchun zal tasdiqlandi. Shartnoma imzolandi.</div>
+            <div class="tl-time">Bugun, 10:30</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="color:var(--blue);"></div>
+            <div class="tl-title">Fotograf to'lov amalga oshirildi</div>
+            <div class="tl-desc">Lens Studio — 3,500,000 so'm avans to'landi</div>
+            <div class="tl-time">Kecha, 15:20</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="color:var(--orange);"></div>
+            <div class="tl-title">Mehmon tasdiqlamasi keldi</div>
+            <div class="tl-desc">12 yangi mehmon ro'yxatdan o'tdi</div>
+            <div class="tl-time">2 kun oldin</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot" style="color:var(--purple);"></div>
+            <div class="tl-title">Dekor shartnomasi yuborildi</div>
+            <div class="tl-desc">Flora Studio imzo kutmoqda</div>
+            <div class="tl-time">3 kun oldin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="card card-p">
+      <div class="sec-head"><h2>⚡ Tezkor Harakatlar</h2></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-outline" onclick="showPage('services')">🔍 Xizmat qidirish</button>
+        <button class="btn btn-outline" onclick="showPage('booking')">📋 Bron qo'shish</button>
+        <button class="btn btn-outline" onclick="showPage('guests')">👥 Mehmon qo'shish</button>
+        <button class="btn btn-outline" onclick="showPage('budget')">💸 Xarajat kiritish</button>
+        <button class="btn btn-outline" onclick="showPage('checklist')">✅ Checklist ko'rish</button>
+        <button class="btn btn-outline" onclick="showPage('chat')">💬 Xabar yuborish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: EVENTS ═══ -->
+  <div class="page" id="page-events">
+    <div class="page-head">
+      <div class="ph-left"><h1>Tadbirlarim</h1><p>Barcha rejalashtirilgan tadbirlaringiz</p></div>
+      <button class="btn btn-primary" onclick="showPage('create')">+ Yangi Tadbir</button>
+    </div>
+    <div class="grid3">
+      <!-- Event card 1 -->
+      <div class="card" style="overflow:hidden;">
+        <div style="height:100px;background:linear-gradient(135deg,#1a2d5a,#2563eb55);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;">
+          💍
+          <span class="badge badge-orange" style="position:absolute;top:10px;right:10px;">24 kun qoldi</span>
+        </div>
+        <div class="card-p">
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Muhammadov & Karimova To'yi</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">📅 15 Mart 2026 · 👥 250 mehmon · 📍 Toshkent</div>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--muted);">Tayyorgarlik</span><span style="font-weight:600;">68%</span></div>
+            <div class="progress"><div class="progress-bar" style="width:68%;background:var(--blue);"></div></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-green">✅ Zal</span>
+            <span class="badge badge-green">✅ Foto</span>
+            <span class="badge badge-orange">⏳ Dekor</span>
+            <span class="badge badge-gray">○ Tomosha</span>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-primary btn-sm" style="flex:1;" onclick="showPage('checklist')">Boshqarish</button>
+            <button class="btn btn-outline btn-sm" onclick="showPage('budget')">Byudjet</button>
+          </div>
+        </div>
+      </div>
+      <!-- Event card 2 -->
+      <div class="card" style="overflow:hidden;">
+        <div style="height:100px;background:linear-gradient(135deg,#2d1a5a,#7c3aed55);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;">
+          🎂
+          <span class="badge badge-blue" style="position:absolute;top:10px;right:10px;">45 kun qoldi</span>
+        </div>
+        <div class="card-p">
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Nodira Yubileyi (50 yosh)</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">📅 5 Aprel 2026 · 👥 80 mehmon · 📍 Samarqand</div>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--muted);">Tayyorgarlik</span><span style="font-weight:600;">35%</span></div>
+            <div class="progress"><div class="progress-bar" style="width:35%;background:var(--purple);"></div></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-green">✅ Zal</span>
+            <span class="badge badge-gray">○ Foto</span>
+            <span class="badge badge-gray">○ Tort</span>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-primary btn-sm" style="flex:1;">Boshqarish</button>
+            <button class="btn btn-outline btn-sm">Byudjet</button>
+          </div>
+        </div>
+      </div>
+      <!-- Event card 3 -->
+      <div class="card" style="overflow:hidden;">
+        <div style="height:100px;background:linear-gradient(135deg,#1a3d2d,#05966955);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;">
+          🏢
+          <span class="badge badge-purple" style="position:absolute;top:10px;right:10px;">60 kun qoldi</span>
+        </div>
+        <div class="card-p">
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Korporativ Anjuman 2026</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">📅 20 Aprel 2026 · 👥 150 mehmon · 📍 Toshkent</div>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--muted);">Tayyorgarlik</span><span style="font-weight:600;">15%</span></div>
+            <div class="progress"><div class="progress-bar" style="width:15%;background:var(--green);"></div></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="badge badge-orange">⏳ Zal</span>
+            <span class="badge badge-gray">○ Ovqat</span>
+            <span class="badge badge-gray">○ Sertifikat</span>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-primary btn-sm" style="flex:1;">Boshqarish</button>
+            <button class="btn btn-outline btn-sm">Byudjet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: CREATE EVENT ═══ -->
+  <div class="page" id="page-create">
+    <div class="page-head">
+      <div class="ph-left"><h1>Yangi Tadbir Yaratish</h1><p>To'y, yubilley, korporativ yoki boshqa tadbiringizni rejalashtiring</p></div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="card card-p" style="margin-bottom:16px;">
+          <h2 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">📋 Asosiy Ma'lumotlar</h2>
+          <div class="inp-group"><label class="inp-label">Tadbir nomi</label><input class="inp" placeholder="Masalan: Muhammadov & Karimova nikoh to'yi"/></div>
+          <div class="inp-group"><label class="inp-label">Tadbir turi</label>
+            <select class="inp">
+              <option>💍 Nikoh to'yi</option>
+              <option>🎂 Yubilley</option>
+              <option>🎉 Tug'ilgan kun</option>
+              <option>🏢 Korporativ tadbir</option>
+              <option>📚 Xatna to'yi</option>
+              <option>🎓 Bitiruvchilar kechasi</option>
+              <option>Boshqa</option>
+            </select>
+          </div>
+          <div class="grid2">
+            <div class="inp-group"><label class="inp-label">Tadbir sanasi</label><input class="inp" type="date" value="2026-03-15"/></div>
+            <div class="inp-group"><label class="inp-label">Boshlanish vaqti</label><input class="inp" type="time" value="16:00"/></div>
+          </div>
+          <div class="inp-group"><label class="inp-label">Mehmonlar soni (taxminiy)</label><input class="inp" type="number" placeholder="250" min="1"/></div>
+          <div class="inp-group"><label class="inp-label">Manzil (shahar)</label>
+            <select class="inp"><option>Toshkent</option><option>Samarqand</option><option>Buxoro</option><option>Namangan</option><option>Andijon</option><option>Farg'ona</option><option>Boshqa</option></select>
+          </div>
+          <div class="inp-group"><label class="inp-label">Eslatma / Tavsif</label><textarea class="inp" placeholder="Qo'shimcha ma'lumotlar..."></textarea></div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-p" style="margin-bottom:16px;">
+          <h2 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">💰 Byudjet Rejasi</h2>
+          <div class="inp-group"><label class="inp-label">Umumiy byudjet (so'm)</label><input class="inp" type="number" placeholder="50 000 000"/></div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card2);border-radius:8px;">
+              <span style="font-size:12px;">🏛️ Zal ijarasi</span>
+              <span style="font-size:12px;color:var(--muted);">~35%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card2);border-radius:8px;">
+              <span style="font-size:12px;">📸 Foto/Video</span>
+              <span style="font-size:12px;color:var(--muted);">~10%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card2);border-radius:8px;">
+              <span style="font-size:12px;">🎵 Tomosha</span>
+              <span style="font-size:12px;color:var(--muted);">~15%</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card2);border-radius:8px;">
+              <span style="font-size:12px;">💐 Dekor</span>
+              <span style="font-size:12px;color:var(--muted);">~20%</span>
+            </div>
+          </div>
+        </div>
+        <div class="card card-p">
+          <h2 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">🎯 Kerakli Xizmatlar</h2>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">🏛️ Restoran / Zal</span>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">📸 Fotograf & Videograf</span>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">🎵 Tomosha / Orkestr</span>
+              <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">💐 Dekor & Floristika</span>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">🎂 Tort</span>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">💄 Vizaj & Soch</span>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </label>
+            <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-size:12px;">🚗 Avtomobil ijarasi</span>
+              <div class="toggle" onclick="this.classList.toggle('on')"></div>
+            </label>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:16px;justify-content:center;" onclick="showPage('events')">✅ Tadbir Yaratish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: SERVICES ═══ -->
+  <div class="page" id="page-services">
+    <div class="page-head">
+      <div class="ph-left"><h1>Xizmatlar Bozori</h1><p>O'zbekistonning eng yaxshi to'y xizmatlari</p></div>
+    </div>
+    <!-- Search + Filter -->
+    <div class="card card-p" style="margin-bottom:16px;">
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="flex:1;display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
+          <svg width="14" height="14" fill="none" stroke="var(--muted)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input style="flex:1;background:none;border:none;outline:none;font-size:13px;color:var(--text);font-family:inherit;" placeholder="Xizmat, nom, manzil qidirish..."/>
+        </div>
+        <select class="inp" style="width:auto;padding:8px 12px;">
+          <option>Barcha viloyat</option><option>Toshkent</option><option>Samarqand</option><option>Buxoro</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;" id="cat-filter">
+        <button class="btn btn-primary btn-sm cat-btn" onclick="filterCat(this)">Barchasi</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">🏛️ Zallar</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">📸 Fotograf</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">🎵 Tomosha</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">💐 Dekor</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">🎂 Tort</button>
+        <button class="btn btn-outline btn-sm cat-btn" onclick="filterCat(this)">💄 Vizaj</button>
+      </div>
+    </div>
+    <div class="grid3">
+      <div class="card" style="overflow:hidden;cursor:pointer;" onclick="showPage('booking')">
+        <div style="height:110px;background:linear-gradient(135deg,#1a2d5a,#1e3a80);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;">
+          🏛️<div class="tb-dot" style="position:absolute;top:10px;right:10px;width:8px;height:8px;"></div>
+        </div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Versal To'y Saroyi</div>
+            <span class="badge badge-green">Bo'sh</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent, Chilonzor · 👥 500 kishigacha</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">4.9 (128 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">15 000 000 so'm/kun</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;" onclick="showPage('booking')">Bron Qilish</button>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer;">
+        <div style="height:110px;background:linear-gradient(135deg,#2d1a5a,#4c1d95);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">📸</div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Lens Studio Pro</div>
+            <span class="badge badge-green">Bo'sh</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent · 🎥 Foto + Video</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">5.0 (96 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">3 500 000 so'm/kun</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Bron Qilish</button>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer;">
+        <div style="height:110px;background:linear-gradient(135deg,#1a3d2d,#064e3b);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🎵</div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Golden Orkestr</div>
+            <span class="badge badge-orange">Band: 20 mart</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent · 🎸 To'liq orkestr</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">4.8 (74 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">5 000 000 so'm/kun</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Bron Qilish</button>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer;">
+        <div style="height:110px;background:linear-gradient(135deg,#3d1a1a,#7f1d1d);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">💐</div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Flora Dekor Studio</div>
+            <span class="badge badge-green">Bo'sh</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent · 💐 Gul + Dekor</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">4.9 (52 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">2 800 000 so'm</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Bron Qilish</button>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer;">
+        <div style="height:110px;background:linear-gradient(135deg,#2d2d1a,#78350f);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🎂</div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Sweet Dream Bakery</div>
+            <span class="badge badge-green">Bo'sh</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent · 🎂 Buyurtma tort</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">4.9 (41 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">1 200 000 so'm</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Bron Qilish</button>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer;">
+        <div style="height:110px;background:linear-gradient(135deg,#3d1a2d,#831843);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">💄</div>
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+            <div style="font-size:13px;font-weight:700;">Glamour Beauty</div>
+            <span class="badge badge-green">Bo'sh</span>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">📍 Toshkent · 💄 Vizaj + Soch</div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:10px;">5.0 (88 sharh)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--blue-light);margin-bottom:10px;">800 000 so'm</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Bron Qilish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: BOOKING ═══ -->
+  <div class="page" id="page-booking">
+    <div class="page-head">
+      <div class="ph-left"><h1>Bron Qilish</h1><p>Xizmatni tanlang va shartnoma tuzing</p></div>
+    </div>
+    <div class="grid2">
+      <div class="card card-p">
+        <h2 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;">📋 Bron Ma'lumotlari</h2>
+        <div class="inp-group"><label class="inp-label">Tadbir tanlang</label>
+          <select class="inp"><option>💍 Muhammadov & Karimova To'yi (15 mart)</option><option>🎂 Nodira Yubileyi (5 aprel)</option></select>
+        </div>
+        <div class="inp-group"><label class="inp-label">Xizmat turi</label>
+          <select class="inp"><option>🏛️ Versal To'y Saroyi — Zal</option><option>📸 Lens Studio — Fotograf</option></select>
+        </div>
+        <div class="grid2">
+          <div class="inp-group"><label class="inp-label">Boshlanish sanasi</label><input class="inp" type="date" value="2026-03-15"/></div>
+          <div class="inp-group"><label class="inp-label">Tugash sanasi</label><input class="inp" type="date" value="2026-03-15"/></div>
+        </div>
+        <div class="inp-group"><label class="inp-label">Xizmat narxi (so'm)</label><input class="inp" value="15 000 000" /></div>
+        <div class="inp-group"><label class="inp-label">Avans to'lov (%)</label>
+          <select class="inp"><option>30% — 4 500 000 so'm</option><option>50% — 7 500 000 so'm</option><option>100% — 15 000 000 so'm</option></select>
+        </div>
+        <div class="inp-group"><label class="inp-label">Izoh</label><textarea class="inp" placeholder="Qo'shimcha talablar..."></textarea></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="showPage('contracts')">📄 Shartnoma Yaratish</button>
+      </div>
+      <div>
+        <div class="card card-p" style="margin-bottom:16px;">
+          <h2 style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;">📊 Bronlar Ro'yxati</h2>
+          <table class="tbl">
+            <thead><tr><th>Xizmat</th><th>Sana</th><th>Holat</th><th>Narx</th></tr></thead>
+            <tbody>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#2563eb;">🏛️</div>Versal Saroyi</div></td><td>15 mart</td><td><span class="badge badge-green">✅ Tasdiqlangan</span></td><td>15M</td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#7c3aed;">📸</div>Lens Studio</div></td><td>15 mart</td><td><span class="badge badge-green">✅ Tasdiqlangan</span></td><td>3.5M</td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#ec4899;">💐</div>Flora Dekor</div></td><td>14 mart</td><td><span class="badge badge-orange">⏳ Kutilmoqda</span></td><td>2.8M</td></tr>
+              <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#059669;">🎵</div>Golden Band</div></td><td>15 mart</td><td><span class="badge badge-red">❌ Bekor</span></td><td>5M</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: PAYMENT ═══ -->
+  <div class="page" id="page-payment">
+    <div class="page-head">
+      <div class="ph-left"><h1>To'lovlar</h1><p>Barcha to'lovlar va moliyaviy operatsiyalar</p></div>
+      <button class="btn btn-primary">+ To'lov Qo'shish</button>
+    </div>
+    <div class="grid4" style="margin-bottom:20px;">
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(37,99,235,0.12);">💳</div><div class="sc-val" style="font-size:18px;">42.3M</div><div class="sc-lbl">Jami byudjet</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(16,185,129,0.12);">✅</div><div class="sc-val" style="font-size:18px;">28.7M</div><div class="sc-lbl">To'langan</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(245,158,11,0.12);">⏳</div><div class="sc-val" style="font-size:18px;">13.6M</div><div class="sc-lbl">Qolgan</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(239,68,68,0.12);">📅</div><div class="sc-val" style="font-size:18px;">5</div><div class="sc-lbl">Kutilayotgan</div></div>
+    </div>
+    <div class="card card-p">
+      <div class="sec-head"><h2>💳 To'lovlar Tarixi</h2></div>
+      <table class="tbl">
+        <thead><tr><th>Xizmat</th><th>Miqdor</th><th>Usul</th><th>Sana</th><th>Holat</th></tr></thead>
+        <tbody>
+          <tr><td>🏛️ Versal Saroyi (avans)</td><td style="color:var(--red);font-weight:600;">-4 500 000</td><td><span class="badge badge-blue">Payme</span></td><td>18 Fev 2026</td><td><span class="badge badge-green">✅ O'tdi</span></td></tr>
+          <tr><td>📸 Lens Studio (avans)</td><td style="color:var(--red);font-weight:600;">-1 050 000</td><td><span class="badge badge-blue">Click</span></td><td>17 Fev 2026</td><td><span class="badge badge-green">✅ O'tdi</span></td></tr>
+          <tr><td>💐 Flora Dekor</td><td style="color:var(--red);font-weight:600;">-840 000</td><td><span class="badge badge-orange">Naqd</span></td><td>16 Fev 2026</td><td><span class="badge badge-orange">⏳ Tasdiq</span></td></tr>
+          <tr><td>💄 Glamour Beauty</td><td style="color:var(--red);font-weight:600;">-400 000</td><td><span class="badge badge-blue">Payme</span></td><td>15 Fev 2026</td><td><span class="badge badge-green">✅ O'tdi</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: CONTRACTS ═══ -->
+  <div class="page" id="page-contracts">
+    <div class="page-head">
+      <div class="ph-left"><h1>Shartnomalar</h1><p>Raqamli shartnomalar va imzolar</p></div>
+      <button class="btn btn-primary">+ Yangi Shartnoma</button>
+    </div>
+    <div class="grid2">
+      <div class="card card-p" style="border:1px solid var(--green);position:relative;">
+        <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green">✅ Imzolangan</span></div>
+        <div style="font-size:2rem;margin-bottom:10px;">📄</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Versal Saroyi bilan shartnoma</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Tuzilgan: 18 Fevral 2026 · Amal: 15 Mart 2026</div>
+        <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:12px;font-size:12px;line-height:1.8;color:var(--text2);">
+          <strong>Xizmat:</strong> To'y zali ijarasi (1 kun)<br/>
+          <strong>Narx:</strong> 15 000 000 so'm<br/>
+          <strong>Avans:</strong> 4 500 000 so'm (30%)<br/>
+          <strong>Qolgan:</strong> 10 500 000 so'm (tadbir kuni)<br/>
+          <strong>Bekor qilish:</strong> 14 kun oldin xabardor qilish
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-outline btn-sm">📥 Yuklab olish</button>
+          <button class="btn btn-ghost btn-sm">👁 Ko'rish</button>
+        </div>
+      </div>
+      <div class="card card-p" style="border:1px solid var(--green);position:relative;">
+        <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green">✅ Imzolangan</span></div>
+        <div style="font-size:2rem;margin-bottom:10px;">📄</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Lens Studio bilan shartnoma</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Tuzilgan: 17 Fevral 2026 · Amal: 15 Mart 2026</div>
+        <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:12px;font-size:12px;line-height:1.8;color:var(--text2);">
+          <strong>Xizmat:</strong> Foto + video (to'liq kun)<br/>
+          <strong>Narx:</strong> 3 500 000 so'm<br/>
+          <strong>Avans:</strong> 1 050 000 so'm (30%)<br/>
+          <strong>Qolgan:</strong> 2 450 000 so'm (tadbir kuni)<br/>
+          <strong>Yetkazib berish:</strong> 7 kun ichida
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-outline btn-sm">📥 Yuklab olish</button>
+          <button class="btn btn-ghost btn-sm">👁 Ko'rish</button>
+        </div>
+      </div>
+      <div class="card card-p" style="border:1px solid var(--orange);position:relative;">
+        <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-orange">⏳ Imzo kutilmoqda</span></div>
+        <div style="font-size:2rem;margin-bottom:10px;">📄</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Flora Dekor bilan shartnoma</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Yuborilgan: 16 Fevral 2026</div>
+        <div style="background:var(--card2);border-radius:8px;padding:12px;margin-bottom:12px;font-size:12px;line-height:1.8;color:var(--text2);">
+          <strong>Xizmat:</strong> To'liq dekoratsiya<br/>
+          <strong>Narx:</strong> 2 800 000 so'm<br/>
+          <strong>Status:</strong> Xizmat ko'rsatuvchi imzosi kutilmoqda
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-primary btn-sm">📨 Eslatma yuborish</button>
+          <button class="btn btn-danger btn-sm">Bekor qilish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: GUESTS ═══ -->
+  <div class="page" id="page-guests">
+    <div class="page-head">
+      <div class="ph-left"><h1>Mehmonlar Boshqaruvi</h1><p>RSVP, stol joylashtirish va taklifnomalar</p></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-outline">📧 Taklifnoma Yuborish</button>
+        <button class="btn btn-primary">+ Mehmon Qo'shish</button>
+      </div>
+    </div>
+    <div class="grid4" style="margin-bottom:20px;">
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(37,99,235,0.12);">👥</div><div class="sc-val">250</div><div class="sc-lbl">Jami kutilgan</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(16,185,129,0.12);">✅</div><div class="sc-val">178</div><div class="sc-lbl">Tasdiqladi</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(239,68,68,0.12);">❌</div><div class="sc-val">12</div><div class="sc-lbl">Rad etdi</div></div>
+      <div class="stat-card"><div class="sc-icon" style="background:rgba(245,158,11,0.12);">⏳</div><div class="sc-val">60</div><div class="sc-lbl">Javob bermagan</div></div>
+    </div>
+    <div class="card card-p">
+      <div class="sec-head"><h2>👥 Mehmonlar Ro'yxati</h2>
+        <input class="inp" style="width:200px;" placeholder="Ism bo'yicha qidirish..."/>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Mehmon</th><th>Telefon</th><th>Guruh</th><th>RSVP</th><th>Stol</th><th></th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#2563eb;">AA</div>Aziz Abdullayev</div></td><td>+998 90 123 4567</td><td><span class="badge badge-blue">Kuyov tomoni</span></td><td><span class="badge badge-green">✅ Ha</span></td><td>Stol 3</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#ec4899;">MK</div>Malika Karimova</div></td><td>+998 91 234 5678</td><td><span class="badge badge-pink" style="background:rgba(236,72,153,0.12);color:#f472b6;">Kelin tomoni</span></td><td><span class="badge badge-green">✅ Ha</span></td><td>Stol 1</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#059669;">RU</div>Ravshan Usmonov</div></td><td>+998 93 345 6789</td><td><span class="badge badge-blue">Kuyov tomoni</span></td><td><span class="badge badge-orange">⏳ Javob yo'q</span></td><td>—</td><td><button class="btn btn-ghost btn-sm">📨</button></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px;"><div class="tbl-avatar" style="background:#7c3aed;">SF</div>Sarvinoz Fozilova</div></td><td>+998 94 456 7890</td><td><span class="badge badge-pink" style="background:rgba(236,72,153,0.12);color:#f472b6;">Kelin tomoni</span></td><td><span class="badge badge-red">❌ Kela olmaydi</span></td><td>—</td><td><button class="btn btn-ghost btn-sm">✏️</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: BUDGET ═══ -->
+  <div class="page" id="page-budget">
+    <div class="page-head">
+      <div class="ph-left"><h1>Byudjet Boshqaruvi</h1><p>Xarajatlarni rejalashtiring va nazorat qiling</p></div>
+      <button class="btn btn-primary" onclick="showPage('payment')">+ Xarajat Kiritish</button>
+    </div>
+    <div class="grid2" style="margin-bottom:20px;">
+      <div class="card card-p">
+        <h2 style="font-size:13px;margin-bottom:16px;color:var(--muted);text-transform:uppercase;font-weight:700;">💰 Umumiy Holat</h2>
+        <div style="font-size:32px;font-weight:800;margin-bottom:4px;">42 000 000 <span style="font-size:16px;font-weight:400;color:var(--muted);">so'm</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Jami rejadagi byudjet</div>
+        <div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;"><span>Sarflangan</span><span style="font-weight:700;color:var(--blue-light);">28 700 000 so'm (68%)</span></div><div class="progress" style="height:8px;"><div class="progress-bar" style="width:68%;background:linear-gradient(90deg,var(--blue),var(--accent));"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;"><span>Qolgan</span><span style="font-weight:700;color:var(--green);">13 300 000 so'm (32%)</span></div><div class="progress" style="height:8px;"><div class="progress-bar" style="width:32%;background:var(--green);"></div></div></div>
+      </div>
+      <div class="card card-p">
+        <h2 style="font-size:13px;margin-bottom:16px;color:var(--muted);text-transform:uppercase;font-weight:700;">📊 Kategoriyalar</h2>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>🏛️ Zal</span><span>15M / 15M</span></div><div class="progress"><div class="progress-bar" style="width:100%;background:var(--blue);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>📸 Foto/Video</span><span>3.5M / 5M</span></div><div class="progress"><div class="progress-bar" style="width:70%;background:var(--purple);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>🎵 Tomosha</span><span>0 / 7M</span></div><div class="progress"><div class="progress-bar" style="width:0%;background:var(--orange);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>💐 Dekor</span><span>2.8M / 8M</span></div><div class="progress"><div class="progress-bar" style="width:35%;background:var(--pink);"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span>💄 Vizaj</span><span>0.8M / 2M</span></div><div class="progress"><div class="progress-bar" style="width:40%;background:var(--green);"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: CHECKLIST ═══ -->
+  <div class="page" id="page-checklist">
+    <div class="page-head">
+      <div class="ph-left"><h1>Checklist</h1><p>Bajarilishi kerak bo'lgan ishlar — 8/20 bajarildi</p></div>
+    </div>
+    <div class="grid2">
+      <div class="card card-p">
+        <div class="sec-head"><h2>✅ Bajarilgan (8)</h2></div>
+        <div style="display:flex;flex-direction:column;gap:6px;" id="done-list">
+          <div class="chk-item" style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(16,185,129,0.06);border-radius:8px;border:1px solid rgba(16,185,129,0.15);">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;">✓</div>
+            <span style="font-size:12px;text-decoration:line-through;color:var(--muted);">To'y sanasini belgilash</span>
+          </div>
+          <div class="chk-item" style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(16,185,129,0.06);border-radius:8px;border:1px solid rgba(16,185,129,0.15);">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;">✓</div>
+            <span style="font-size:12px;text-decoration:line-through;color:var(--muted);">Zal bron qilish</span>
+          </div>
+          <div class="chk-item" style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(16,185,129,0.06);border-radius:8px;border:1px solid rgba(16,185,129,0.15);">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;">✓</div>
+            <span style="font-size:12px;text-decoration:line-through;color:var(--muted);">Fotograf bron qilish</span>
+          </div>
+          <div class="chk-item" style="display:flex;align-items:center;gap:10px;padding:10px;background:rgba(16,185,129,0.06);border-radius:8px;border:1px solid rgba(16,185,129,0.15);">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;">✓</div>
+            <span style="font-size:12px;text-decoration:line-through;color:var(--muted);">Vizaj master bron qilish</span>
+          </div>
+        </div>
+      </div>
+      <div class="card card-p">
+        <div class="sec-head"><h2>⏳ Bajarilmagan (12)</h2></div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">🎵 Orkestr / tomosha bron qilish</div><div style="font-size:10px;color:var(--orange);">⚠️ Shoshilinch — 15 kunda bajarish kerak</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">💐 Dekor shartnomasi imzolash</div><div style="font-size:10px;color:var(--orange);">⚠️ Flora Dekor imzosi kutilmoqda</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">📧 Taklifnomalarni yuborish</div><div style="font-size:10px;color:var(--muted);">60 mehmon hali tasdiqlamagan</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">🎂 Tort buyurtma berish</div><div style="font-size:10px;color:var(--muted);">Kamida 2 hafta oldin</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">🚗 Kelin mashinasini band qilish</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:8px;border:1px solid var(--border);cursor:pointer;" onclick="markDone(this)">
+            <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;"></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:500;">👗 Kelin libosi tayyor qilish</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: CHAT ═══ -->
+  <div class="page" id="page-chat">
+    <div class="page-head">
+      <div class="ph-left"><h1>Xabarlashuv</h1><p>Xizmat ko'rsatuvchilar bilan muloqot</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:calc(100vh - 140px);">
+      <!-- Contact list -->
+      <div class="card" style="overflow-y:auto;">
+        <div style="padding:12px;border-bottom:1px solid var(--border);">
+          <input class="inp" placeholder="Qidirish..." style="font-size:12px;"/>
+        </div>
+        <div id="chat-contacts">
+          <div class="chat-contact active-contact" onclick="selectContact(this,'Versal Saroyi','🏛️')" style="display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer;background:var(--blue-soft);border-left:2px solid var(--blue);">
+            <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#1a2d5a,#2563eb);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🏛️</div>
+            <div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">Versal Saroyi</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tasdiqlandi, xizmatga tayyormiz</div></div>
+            <div style="font-size:10px;color:var(--muted);">10:30</div>
+          </div>
+          <div class="chat-contact" onclick="selectContact(this,'Lens Studio','📸')" style="display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer;border-top:1px solid var(--border2);">
+            <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#2d1a5a,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📸</div>
+            <div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">Lens Studio</div><div style="font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Portfolio yuborishimni so'radingiz?</div></div>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="chat-contact" onclick="selectContact(this,'Flora Dekor','💐')" style="display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer;border-top:1px solid var(--border2);">
+            <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#3d1a1a,#7f1d1d);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">💐</div>
+            <div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">Flora Dekor</div><div style="font-size:11px;color:var(--muted);">Shartnoma ko'rib chiqilmoqda</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Chat window -->
+      <div class="card" style="display:flex;flex-direction:column;">
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+          <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#1a2d5a,#2563eb);display:flex;align-items:center;justify-content:center;font-size:14px;" id="chat-icon">🏛️</div>
+          <div><div style="font-size:13px;font-weight:600;" id="chat-name">Versal Saroyi</div><div style="font-size:11px;color:var(--green);">● Onlayn</div></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:16px;" id="chat-messages">
+          <div class="chat-msg"><div class="chat-av">VS</div><div><div class="chat-bubble">Assalomu alaykum! 15 mart uchun bron tasdiqlandi. Xizmatga tayyormiz. 🎉</div><div class="chat-time">10:28</div></div></div>
+          <div class="chat-msg own"><div class="chat-av">AK</div><div><div class="chat-bubble">Rahmat! Dekor jamoangiz bilan koordinatsiya qilish mumkinmi?</div><div class="chat-time">10:30</div></div></div>
+          <div class="chat-msg"><div class="chat-av">VS</div><div><div class="chat-bubble">Albatta! Ular 14 martda soat 14:00 da kelishlari mumkin. Bizning menejer ular bilan ishlaydi.</div><div class="chat-time">10:32</div></div></div>
+        </div>
+        <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;">
+          <input class="inp" id="chat-input" placeholder="Xabar yozing..." style="flex:1;" onkeydown="if(event.key==='Enter')sendMsg()"/>
+          <button class="btn btn-primary" onclick="sendMsg()">Yuborish →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PAGE: CALENDAR ═══ -->
+  <div class="page" id="page-calendar">
+    <div class="page-head">
+      <div class="ph-left"><h1>Taqvim</h1><p>Barcha tadbirlar va bronlar taqvimi</p></div>
+    </div>
+    <div class="grid2">
+      <div class="card card-p">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <button class="btn btn-ghost btn-sm">← Oldingi</button>
+          <h2 style="font-size:14px;font-weight:700;">Mart 2026</h2>
+          <button class="btn btn-ghost btn-sm">Keyingi →</button>
+        </div>
+        <div class="cal-grid" style="margin-bottom:8px;">
+          <div class="cal-day-name">Du</div><div class="cal-day-name">Se</div><div class="cal-day-name">Ch</div>
+          <div class="cal-day-name">Pa</div><div class="cal-day-name">Ju</div><div class="cal-day-name">Sh</div><div class="cal-day-name">Ya</div>
+        </div>
+        <div class="cal-grid" id="cal-days"></div>
+      </div>
+      <div class="card card-p">
+        <div class="sec-head"><h2>📅 Martdagi Tadbirlar</h2></div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="padding:12px;background:rgba(37,99,235,0.08);border-radius:8px;border-left:3px solid var(--blue);">
+            <div style="font-size:12px;font-weight:700;margin-bottom:2px;">💍 Muhammadov & Karimova To'yi</div>
+            <div style="font-size:11px;color:var(--muted);">15 Mart · 16:00 · Versal Saroyi · 250 mehmon</div>
+          </div>
+          <div style="padding:12px;background:rgba(16,185,129,0.08);border-radius:8px;border-left:3px solid var(--green);">
+            <div style="font-size:12px;font-weight:700;margin-bottom:2px;">🚚 Dekor o'rnatish</div>
+            <div style="font-size:11px;color:var(--muted);">14 Mart · 14:00 · Flora Dekor</div>
+          </div>
+          <div style="padding:12px;background:rgba(245,158,11,0.08);border-radius:8px;border-left:3px solid var(--orange);">
+            <div style="font-size:12px;font-weight:700;margin-bottom:2px;">📸 Foto sessiya (Pre-wedding)</div>
+            <div style="font-size:11px;color:var(--muted);">10 Mart · 10:00 · Lens Studio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ═══ NAVIGATION ═══
+const titles = {
+  dashboard:'Dashboard', events:'Tadbirlarim', create:'Tadbir Yaratish',
+  services:'Xizmatlar Bozori', booking:'Bron Qilish', payment:'To\'lovlar',
+  contracts:'Shartnomalar', guests:'Mehmonlar', budget:'Byudjet',
+  checklist:'Checklist', chat:'Xabarlashuv', calendar:'Taqvim'
+};
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))n.classList.add('active');
+  });
+  document.getElementById('topbar-title').textContent=titles[id]||id;
+  window.scrollTo(0,0);
+}
+
+// ═══ CATEGORY FILTER ═══
+function filterCat(btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>{b.className='btn btn-outline btn-sm cat-btn';});
+  btn.className='btn btn-primary btn-sm cat-btn';
+}
+
+// ═══ CHECKLIST ═══
+function markDone(el){
+  el.style.background='rgba(16,185,129,0.06)';
+  el.style.borderColor='rgba(16,185,129,0.15)';
+  const dot=el.querySelector('div');
+  dot.style.background='var(--green)';dot.style.border='none';dot.textContent='✓';dot.style.fontSize='10px';dot.style.color='#fff';
+  const txt=el.querySelectorAll('div')[1]?.querySelector('div');
+  if(txt){txt.style.textDecoration='line-through';txt.style.color='var(--muted)';}
+}
+
+// ═══ CHAT ═══
+function selectContact(el,name,icon){
+  document.querySelectorAll('.chat-contact').forEach(c=>{
+    c.style.background='';c.style.borderLeft='';
+  });
+  el.style.background='var(--blue-soft)';el.style.borderLeft='2px solid var(--blue)';
+  document.getElementById('chat-name').textContent=name;
+  document.getElementById('chat-icon').textContent=icon;
+}
+function sendMsg(){
+  const inp=document.getElementById('chat-input');
+  const val=inp.value.trim();if(!val)return;
+  const msgs=document.getElementById('chat-messages');
+  msgs.innerHTML+=`<div class="chat-msg own"><div class="chat-av">AK</div><div><div class="chat-bubble">${val}</div><div class="chat-time">Hozir</div></div></div>`;
+  inp.value='';msgs.scrollTop=msgs.scrollHeight;
+}
+
+// ═══ CALENDAR ═══
+(function buildCal(){
+  const days=['','','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
+  const busyDays=['10','14'];const eventDays=['15'];
+  const grid=document.getElementById('cal-days');
+  days.forEach(d=>{
+    const el=document.createElement('div');
+    el.className='cal-day'+(d===''?' empty':'');
+    if(busyDays.includes(d))el.classList.add('has-event');
+    if(eventDays.includes(d))el.classList.add('today');
+    el.textContent=d;
+    grid.appendChild(el);
+  });
+})();
+
+// ═══ TOGGLE ═══
+document.querySelectorAll('.toggle').forEach(t=>{
+  t.addEventListener('click',()=>t.classList.toggle('on'));
+});
+</script>
+</body>
+</html>
